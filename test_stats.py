@@ -5,6 +5,7 @@ import scipy.stats as stats
 import sys
 import numpy as np
 import unittest
+import mass
 
 def t_test(mean , A , B = None):
 	
