@@ -3,9 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import quad
 
-tau0 = 0.002
+
 def tau(V):
-	return tau0
+	return 5.25e-10 * V ##Assumes units of km / 2
 
 def integrate(times , I , V):
 	integral = 0
@@ -16,12 +16,13 @@ def integrate(times , I , V):
 		
 		dt = t2 - t1
 		
-		I1 = I[i] / (V ** 2 * tau(V))
-		I2 = I[i + 1] / (V ** 2 * tau(V))
+		I1 = I[i]
+		I2 = I[i + 1]
 		
 		integral += dt * (I2 + I1) / 2.0 ##trapezoid rule
 	
-	return integral
+	return 2 *  integral / (V ** 2 * tau(V))
+	
 	
 
 	
