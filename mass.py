@@ -8,6 +8,14 @@ def tau(V):
 	return 5.25e-10 * V ##Assumes units of km / 2
 
 def integrate(times , I , V):
+
+	'''
+	times should be array-like, and contain the times of each brightness measurement.
+	I contains the measured intensities at each time
+	V should be the magnitude of the velocity of the meteor in km / s
+	'''
+	
+	
 	integral = 0
 	
 	for i in range(len(times) - 1):
@@ -21,19 +29,15 @@ def integrate(times , I , V):
 		
 		integral += dt * (I2 + I1) / 2.0 ##trapezoid rule
 	
-	return 2 *  integral / (V ** 2 * tau(V))
+	return 2 *  integral / (V ** 2 * tau(V)) , integral
 	
 	
-
+def f(x):
+	return x
 	
-t1 = 0
-t2 = 10 ##In some units
+x = np.array(range(100))
+y = f(x)
+v = 40
 
-V = 10
-
-times = range(20)
-I = range(20)
-
-A = integrate(times , I , V)
-
-print (A)
+a , b = integrate(x , y , v)
+print (b , b - 0.5 * max(x) * max(y))
